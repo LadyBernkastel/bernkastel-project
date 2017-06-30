@@ -1,13 +1,14 @@
 package apprentices.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import apprentices.entity.DefaultItem;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@Repository
-public class DefaultRepository {
+import java.util.List;
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+@RepositoryRestResource(collectionResourceRel = "default", path = "default")
+public interface DefaultRepository extends PagingAndSortingRepository<DefaultItem, Long> {
 
+    List<DefaultItem> findByLastName(@Param("name") String name);
 }
